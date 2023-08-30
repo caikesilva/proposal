@@ -32,6 +32,14 @@ class ProposalAdmin(admin.ModelAdmin):
     
     view_value.short_description = "Valor da proposta"
     
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change, **kwargs)
+        if obj:
+            if obj.status == "Negada":
+                form.base_fields['status'].disabled = True
+                
+        return form
+    
     def has_add_permission(self, request, obj=None):
         return False
 
