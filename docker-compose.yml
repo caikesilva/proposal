@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  web:
+    build: 
+      context: ./challenge-django-consultant
+      dockerfile: Dockerfile
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./challenge-django-consultant/:/usr/src/app/
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+  celery:
+    build: 
+      context: ./challenge-django-consultant
+      dockerfile: Dockerfile
+    command: celery -A setup worker -B -l info -E
+    volumes:
+      - ./challenge-django-consultant/:/usr/src/app/
+    depends_on:
+      - redis
+      - web

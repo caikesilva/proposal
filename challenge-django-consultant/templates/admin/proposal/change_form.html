@@ -1,0 +1,20 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+{% load get_label_input %}
+{% block field_sets %}
+    {% for fieldset in adminform %}
+        {% include "admin/includes/fieldset.html" %}
+        <fieldset class="module aligned ">
+            {% for key, value in original.values.items %}
+                <div class="form-row field-label">
+                    <div>
+                        <div class="flex-container">
+                            <label class="required" for="id_label">{{ key|get_label_input }}:</label>
+                            <input type="text" name="{{ key }}" class="vTextField" id="id_{{ key }}" value="{{ value }}" disabled>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </fieldset>
+    {% endfor %}
+{% endblock %}
