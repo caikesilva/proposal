@@ -2,8 +2,14 @@
 
 ## Clonar repositório
 Clone o projeto com o seguinte comando:
+<br>
+SSH
 ```sh
 git clone git@github.com:caikesilva/proposal.git
+```
+HTTPS
+```sh
+git clone https://github.com/caikesilva/proposal.git
 ```
 
 ## Build containers Docker
